@@ -34,12 +34,10 @@ def extract_text_from_ppt(path):
 
     return result
 
-
 # -----------------------------
 # function：用本地模型（Ollama）產生設計
 # -----------------------------
 def generate_redesign(slides_text, style):
-
     prompt = f"""
 你是一位頂尖簡報設計師。
 
@@ -62,7 +60,6 @@ def generate_redesign(slides_text, style):
 ...
 （所有頁面依序輸出）
     """
-
     process = subprocess.Popen(
         ["ollama", "run", "llama3.1"],
         stdin=subprocess.PIPE,
@@ -70,18 +67,14 @@ def generate_redesign(slides_text, style):
         stderr=subprocess.PIPE,
         text=True
     )
-
     output, _ = process.communicate(prompt)
-
     return output
-
 
 # -----------------------------
 # function：生成新 PPT
 # -----------------------------
 def create_new_ppt(design_text):
     prs = Presentation()
-
     slides = design_text.split("[Slide")
     slides = [s.strip() for s in slides if s.strip()]
 
@@ -110,7 +103,6 @@ def create_new_ppt(design_text):
     prs.save(tmp.name)
     return tmp.name
 
-
 # -----------------------------
 # Streamlit UI
 # -----------------------------
@@ -118,6 +110,15 @@ st.set_page_config(page_title="免費版 AI PPT 設計", page_icon="🎨")
 
 st.title("🎨 免費版 AI PPT 重新設計（本地模型，不用 API Key）")
 st.subheader("使用 Ollama + 本地模型（LLaMA3 / Qwen）完全免費")
+
+# -----------------------------
+# 明顯提醒使用者
+# -----------------------------
+st.warning(
+    "❗❗ Windows 使用者務必注意：\n"
+    "請確保 ollama.exe 已加入系統 PATH，或在程式裡指定完整路徑，"
+    "否則程式無法順利呼叫本地模型！"
+)
 
 # -----------------------------
 # 風格選擇
@@ -129,7 +130,6 @@ keys = list(PRESET_STYLES.keys())
 
 for i, col in enumerate(cols):
     with col:
-        # 修正：按下按钮後，將值儲存到 session_state
         if st.button(keys[i]):
             st.session_state.selected_style = PRESET_STYLES[keys[i]]
 
