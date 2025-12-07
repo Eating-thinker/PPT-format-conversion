@@ -3,6 +3,8 @@
 使用 **Streamlit + Ollama 本地模型**，可以將你的 PPT 依照指定風格自動重新設計。
 完全免費，不需要 OpenAI API Key。
 
+**▶️ 線上 Demo：[點我打開](https://ppt-format-conversion-ovlfr8pbryqdary55uofrp.streamlit.app/)**
+
 ---
 
 ## 🛠 功能
@@ -32,9 +34,11 @@ ai-ppt-redesign/
 * Python 3.10+
 * Streamlit
 * python-pptx
-* Ollama 已安裝並可在命令列使用
+* **Ollama 已安裝並可在命令列使用**
 
-> Windows 使用者注意：請確保 `ollama.exe` 在系統 PATH，或在程式裡指定完整路徑。
+> ❗❗ **Windows 使用者務必注意**
+> 請確保 **`ollama.exe` 已加入系統 PATH**，或在程式裡指定完整路徑
+> 否則程式無法順利呼叫本地模型。
 
 ---
 
@@ -86,7 +90,7 @@ streamlit run app.py
 ## ⚠️ 注意事項
 
 * Ollama **必須安裝**，程式才會順利呼叫模型
-* Windows 使用者如果遇到 `FileNotFoundError`，請確認 `ollama.exe` 在 PATH 或指定完整路徑
+* Windows 使用者如果遇到 `FileNotFoundError`，請確認 **`ollama.exe` 在系統 PATH**，或在程式裡指定完整路徑
 * Streamlit 每次操作會 rerun app，所以風格選擇已改用 `st.session_state` 記錄
 * 模型生成速度取決於本地電腦性能
 
